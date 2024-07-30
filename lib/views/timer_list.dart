@@ -17,61 +17,96 @@ class TimerList extends ConsumerWidget {
         itemCount: timers.length,
         itemBuilder: (context, index) {
           var grillItem = timers[index];
-          var timer = grillItem.timer;
           return Column(
             children: [
               if (index == 0) const Divider(),
               Dismissible(
                 key: Key(grillItem.id),
                 background: Container(
-                  color: Colors.red.withOpacity(0.5),
-                  alignment: Alignment.centerRight,
-                  child: const Icon(Icons.delete),
+                  color: Colors.red.withOpacity(0.35),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Icon(Icons.delete),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Icon(Icons.delete),
+                      )
+                    ],
+                  ),
                 ),
                 onDismissed: (direction) {
                   ref
                       .read(grillItemsProvider.notifier)
                       .removeGrillItem(grillItem);
                 },
-                child: Opacity(
-                  opacity: timer.isPaused ? 0.5 : 1,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          final flippedItem = grillItem.flip();
-                          ref.read(grillItemsProvider.notifier).removeGrillItem(grillItem);
-                          ref.read(grillItemsProvider.notifier).addGrillItem(flippedItem);
-                        },
-                        child: GrillItemIcon(grillItem: grillItem),
-                      ),
-                      InkWell(
-                          onTap: () {
-                            if (grillItem.isPaused) {
-                              grillItem.resume();
-                            } else {
-                              grillItem.pause();
-                            }
-                          },
-                          child: TextTimer(grillItem: grillItem)),
-                      if (grillItem.isPaused)
-                        IconButton(
-                          onPressed: () {
-                            grillItem.resume();
-                          },
-                          icon: const Icon(Icons.pause),
-                        ),
-                    ],
-                  ),
-                ),
+                child: GrillItemRow(grillItem: grillItem),
               ),
               const Divider(),
             ],
           );
         },
       ),
+    );
+  }
+}
+
+class GrillItemRow extends ConsumerWidget {
+  const GrillItemRow({
+    super.key,
+    required this.grillItem,
+  });
+
+  final GrillItem grillItem;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Stack(
+      children: [
+        Opacity(
+          opacity: grillItem.isPaused ? 0.25 : 1,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              InkWell(
+                onTap: () {
+                  final flippedItem = grillItem.flip();
+                  ref
+                      .read(grillItemsProvider.notifier)
+                      .removeGrillItem(grillItem);
+                  ref
+                      .read(grillItemsProvider.notifier)
+                      .addGrillItem(flippedItem);
+                },
+                child: GrillItemIcon(grillItem: grillItem),
+              ),
+              InkWell(
+                  onTap: () {
+                    if (grillItem.isPaused) {
+                      grillItem.resume();
+                    } else {
+                      grillItem.pause();
+                    }
+                  },
+                  child: TextTimer(grillItem: grillItem)),
+            ],
+          ),
+        ),
+        if (grillItem.isPaused)
+          Center(
+            child: IconButton(
+              onPressed: () {
+                grillItem.resume();
+              },
+              icon: const Icon(Icons.pause, size: 50),
+            ),
+          ),
+      ],
     );
   }
 }
@@ -86,20 +121,20 @@ class GrillItemIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-        children: [
-          Transform(
-            alignment: Alignment.center,
-            transform: Matrix4.rotationZ(grillItem.flips.isOdd ? 3.14159 : 0), // Rotate by 180 degrees if flips is odd
-            child: Image.asset(
-              grillItem.image,
-              width: 60,
-              height: 60,
-            ),
-          ),
-          if (grillItem.flips > 0 && grillItem.flipTimer != null)
-            FlipCounter(timer: grillItem.flipTimer!, flips: grillItem.flips),
-        ]);
+    return Stack(children: [
+      Transform(
+        alignment: Alignment.center,
+        transform: Matrix4.rotationZ(grillItem.flips.isOdd ? 3.14159 : 0),
+        // Rotate by 180 degrees if flips is odd
+        child: Image.asset(
+          grillItem.image,
+          width: 60,
+          height: 60,
+        ),
+      ),
+      if (grillItem.flips > 0 && grillItem.flipTimer != null)
+        FlipCounter(timer: grillItem.flipTimer!, flips: grillItem.flips),
+    ]);
   }
 }
 
@@ -127,16 +162,10 @@ class FlipCounter extends StatelessWidget {
         child: Row(
           children: [
             Text(flips.toString(),
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .labelSmall),
+                style: Theme.of(context).textTheme.labelSmall),
             const SizedBox(width: 5),
             Text(timer.getFormattedElapsedTime(),
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .labelSmall),
+                style: Theme.of(context).textTheme.labelSmall),
           ],
         ),
       ),
