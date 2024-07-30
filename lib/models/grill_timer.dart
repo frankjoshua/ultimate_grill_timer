@@ -4,7 +4,12 @@ class GrillTimer {
   Duration pauseDuration;
   DateTime? pauseStartTime;
 
-  GrillTimer({required this.startTime, this.isPaused = false, this.pauseDuration = Duration.zero, this.pauseStartTime});
+  GrillTimer({
+    required this.startTime,
+    this.isPaused = false,
+    this.pauseDuration = Duration.zero,
+    this.pauseStartTime,
+  });
 
   Duration get elapsedTime {
     final currentTime = DateTime.now();
@@ -43,7 +48,9 @@ class GrillTimer {
     }
   }
 
-  toMap() {
+
+
+  Map<String, dynamic> toMap() {
     return {
       'startTime': startTime.toIso8601String(),
       'isPaused': isPaused,
@@ -52,7 +59,10 @@ class GrillTimer {
     };
   }
 
-  static fromMap(Map<String, dynamic> map) {
+  static GrillTimer? fromMap(Map<String, dynamic>? map) {
+    if (map == null) {
+      return null;
+    }
     return GrillTimer(
       startTime: DateTime.parse(map['startTime']),
       isPaused: map['isPaused'],
@@ -66,6 +76,8 @@ class GrillTimer {
     bool? isPaused,
     Duration? pauseDuration,
     DateTime? pauseStartTime,
+    int? flips,
+    DateTime? lastFlipTime,
   }) {
     return GrillTimer(
       startTime: startTime ?? this.startTime,
@@ -74,5 +86,4 @@ class GrillTimer {
       pauseStartTime: pauseStartTime ?? this.pauseStartTime,
     );
   }
-
 }

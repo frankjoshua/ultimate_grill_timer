@@ -24,10 +24,22 @@ class SaveStateWidgetState extends ConsumerState<SaveStateWidget>{
     super.initState();
     RestoreGrillItemsUseCase().execute(ref);
     ref.listenManual(grillItemsProvider, (previous, next){
-      if(previous != null && next.length != previous.length){
+      if(previous != null && shouldSave(next, previous)){
         SaveGrillItemsUseCase().execute(ref, next);
       }
     });
+  }
+
+  bool shouldSave(List<GrillItem> next, List<GrillItem> previous) {
+    if(next.length != previous.length){
+      return true;
+    }
+    for(int i = 0; i < next.length; i++){
+      if(next[i].flips != previous[i].flips){
+        return true;
+      }
+    }
+    return false;
   }
   
   @override

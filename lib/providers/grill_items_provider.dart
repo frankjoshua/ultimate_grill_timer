@@ -30,10 +30,14 @@ class GrillItemsProvider extends StateNotifier<List<GrillItem>> {
       final updatedTimer = item.timer.copyWith(
           startTime: item.timer.startTime.copyWith(millisecond: syncTime.millisecond),
       );
+      final updatedFlipTimer = item.flipTimer?.copyWith(
+        startTime: item.flipTimer!.startTime.copyWith(millisecond: syncTime.millisecond),
+      );
 
-      return item.copyWith(timer: updatedTimer);
+      return item.copyWith(timer: updatedTimer, flipTimer: updatedFlipTimer);
     }).toList();
-
+    // Sort grillItems by startTime
+    syncedGrillItems.sort((a, b) => a.timer.startTime.compareTo(b.timer.startTime));
     return syncedGrillItems;
   }
 

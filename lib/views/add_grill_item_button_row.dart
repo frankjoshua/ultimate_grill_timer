@@ -6,7 +6,7 @@ import '../models/grill_timer.dart';
 import '../providers/grill_items_provider.dart';
 
 class AddGrillItemButtonRow extends ConsumerStatefulWidget {
-  const AddGrillItemButtonRow({Key? key}) : super(key: key);
+  const AddGrillItemButtonRow({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() {
@@ -27,7 +27,8 @@ class _AddGrillItemButtonRowState extends ConsumerState<AddGrillItemButtonRow> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisSize: MainAxisSize.max,
       children: [
         FloatingActionButton(
           onPressed: () { _addTimer('assets/images/meat.png'); },
@@ -37,7 +38,6 @@ class _AddGrillItemButtonRowState extends ConsumerState<AddGrillItemButtonRow> {
             child: Image.asset('assets/images/meat.png'),
           ),
         ),
-        const SizedBox(width: 10),
         FloatingActionButton(
           onPressed: () { _addTimer('assets/images/corn.png'); },
           tooltip: 'Add Timer',
@@ -46,7 +46,6 @@ class _AddGrillItemButtonRowState extends ConsumerState<AddGrillItemButtonRow> {
             child: Image.asset('assets/images/corn.png'),
           ),
         ),
-        const SizedBox(width: 10),
         FloatingActionButton(
           onPressed: () { _addTimer('assets/images/burger.png'); },
           tooltip: 'Add Timer',
@@ -55,7 +54,6 @@ class _AddGrillItemButtonRowState extends ConsumerState<AddGrillItemButtonRow> {
             child: Image.asset('assets/images/burger.png'),
           ),
         ),
-        const SizedBox(width: 10),
         FloatingActionButton(
           onPressed: () { _addTimer('assets/images/potato.png'); },
           tooltip: 'Add Timer',

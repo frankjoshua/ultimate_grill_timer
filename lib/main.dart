@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ultimate_grill_timer/views/add_grill_item_button_row.dart';
+import 'package:ultimate_grill_timer/views/instructions_view.dart';
 import 'package:ultimate_grill_timer/views/timer_list.dart';
 
 import 'managers/save_state_widget.dart';
@@ -51,12 +52,17 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Expanded(child: TimerList()),
+              Instructions(),
+              SizedBox(height: 100),
             ],
           ),
         ),
-        floatingActionButton: AddGrillItemButtonRow(), // This trailing comma makes auto-formatting nicer for build methods.
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: AddGrillItemButtonRow(),
       ),
     );
   }
 }
+
+
 
