@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/grill_item.dart';
-import '../models/grill_timer.dart';
 import '../providers/grill_items_provider.dart';
 
 class TimerList extends ConsumerWidget {

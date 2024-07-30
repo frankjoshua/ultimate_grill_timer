@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ultimate_grill_timer/views/add_grill_item_button_row.dart';
 import 'package:ultimate_grill_timer/views/timer_list.dart';
 
+import 'managers/save_state_widget.dart';
 import 'managers/timer_manager.dart';
 
 void main() {
@@ -43,16 +44,18 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Expanded(child: TimerList()),
-          ],
+    return SaveStateWidget(
+      child: const Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Expanded(child: TimerList()),
+            ],
+          ),
         ),
+        floatingActionButton: AddGrillItemButtonRow(), // This trailing comma makes auto-formatting nicer for build methods.
       ),
-      floatingActionButton: AddGrillItemButtonRow(), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

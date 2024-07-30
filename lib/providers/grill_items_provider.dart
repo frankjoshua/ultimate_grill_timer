@@ -12,11 +12,33 @@ class GrillItemsProvider extends StateNotifier<List<GrillItem>> {
   GrillItemsProvider() : super([]);
 
   void addGrillItem(GrillItem grillItem) {
-    state = [...state, grillItem];
+    state = _syncGrillItems([...state, grillItem]);
   }
 
   void removeGrillItem(GrillItem grillItem) {
-    state = [...state]..remove(grillItem);
+    state = _syncGrillItems([...state]..remove(grillItem));
+  }
+
+  List<GrillItem> _syncGrillItems(List<GrillItem> grillItems) {
+    if (grillItems.isEmpty) return grillItems;
+
+    // Get the current time with millisecond precision
+    final syncTime = grillItems.first.timer.startTime;
+
+    // Update each GrillTimer to have the same millisecond precision
+    final syncedGrillItems = grillItems.map((item) {
+      final updatedTimer = item.timer.copyWith(
+          startTime: item.timer.startTime.copyWith(millisecond: syncTime.millisecond),
+      );
+
+      return item.copyWith(timer: updatedTimer);
+    }).toList();
+
+    return syncedGrillItems;
+  }
+
+  void restoreGrillItems(List<GrillItem> grillItems) {
+    state = List.from(grillItems);
   }
 
   void refresh() {
