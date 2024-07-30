@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:async';
 
-import '../providers/timers_provider.dart';
+import '../providers/grill_items_provider.dart';
 
 class TimerManager extends ConsumerStatefulWidget {
   const TimerManager({super.key, required this.child});
@@ -31,7 +31,7 @@ class TimerManagerState extends ConsumerState<TimerManager> {
   }
 
   void _updateTimers() {
-    ref.read(timersProvider.notifier).refresh();
+    ref.read(grillItemsProvider.notifier).refresh();
     // Read the timers from the provider
     // List<GrillTimer> timers = ref.read(timersProvider);
     //

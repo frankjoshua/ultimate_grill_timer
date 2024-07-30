@@ -1,44 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../models/grill_item.dart';
 import '../models/grill_timer.dart';
-import '../providers/timers_provider.dart';
+import '../providers/grill_items_provider.dart';
 
 class TimerList extends ConsumerWidget {
   const TimerList({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final timers = ref.watch(timersProvider);
+    final timers = ref.watch(grillItemsProvider);
     return ListView.builder(
       itemCount: timers.length,
       itemBuilder: (context, index) {
+        var grillItem = timers[index];
+        var timer = grillItem.timer;
         return Column(
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: [
-                TextTimer(timer: timers[index]),
+                Image.asset(grillItem.image, width: 50, height: 50),
+                const SizedBox(width: 10),
+                TextTimer(grillItem: grillItem),
                 const SizedBox(width: 10),
                 const SizedBox(width: 10),
-                if (!timers[index].isPaused)
+                if (!timer.isPaused)
                   IconButton(
                     onPressed: () {
-                      timers[index].pause();
+                      timer.pause();
                     },
                     icon: const Icon(Icons.pause),
                   )
                 else
                   IconButton(
                     onPressed: () {
-                      timers[index].resume();
+                      timer.resume();
                     },
                     icon: const Icon(Icons.play_arrow),
                   ),
                 IconButton(
                   onPressed: () {
-                    ref.read(timersProvider.notifier).removeTimer(timers[index]);
+                    ref.read(grillItemsProvider.notifier).removeGrillItem(grillItem);
                   },
                   icon: const Icon(Icons.delete),
                 ),
@@ -53,12 +58,12 @@ class TimerList extends ConsumerWidget {
 }
 
 class TextTimer extends StatelessWidget {
-  const TextTimer({super.key, required this.timer});
+  const TextTimer({super.key, required this.grillItem});
 
-  final GrillTimer timer;
+  final GrillItem grillItem;
 
   @override
   Widget build(BuildContext context) {
-    return Text(timer.getFormattedElapsedTime(), style: Theme.of(context).textTheme.displayLarge);
+    return Text(grillItem.timer.getFormattedElapsedTime(), style: Theme.of(context).textTheme.displayLarge);
   }
 }
