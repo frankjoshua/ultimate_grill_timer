@@ -8,7 +8,7 @@ class RestoreGrillItemsUseCase {
   Future<void> execute(WidgetRef ref) async {
     print('Restore grill items');
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String? json = await prefs.getString('grillItems');
+    final String? json = prefs.getString('grillItems');
     if (json != null) {
       print(json);
       final GrillItemsSaveState grillItemsSaveState =

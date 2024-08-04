@@ -124,7 +124,7 @@ class GrillItemIcon extends StatelessWidget {
     return Stack(children: [
       Transform(
         alignment: Alignment.center,
-        transform: Matrix4.rotationZ(grillItem.flips.isOdd ? 3.14159 : 0),
+        transform: Matrix4.rotationZ(grillItem.flips * (3.14159) * 0.5),
         // Rotate by 180 degrees if flips is odd
         child: Image.asset(
           grillItem.image,

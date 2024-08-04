@@ -53,12 +53,11 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
             children: <Widget>[
               Expanded(child: TimerList()),
               Instructions(),
-              SizedBox(height: 100),
+              const SizedBox(height: 16),
+              AddGrillItemButtonRow(),
             ],
           ),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: AddGrillItemButtonRow(),
       ),
     );
   }
