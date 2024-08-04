@@ -69260,7 +69260,7 @@ $S:0}
 A.Da.prototype={
 mh(a,b){var s=b.vd($.jI(),t.OC),r=t.F,q=A.b([],r),p=J.bd(s)
 if(p.gN(s))q.push(B.N7)
-if(p.gbd(s)&&p.gA(s)<2)B.b.J(q,A.b([B.Au,B.At,B.Av],r))
+if(p.gbd(s)&&p.gA(s)<2)B.b.J(q,A.b([B.Au,B.Av,B.At],r))
 return A.ah0(q)}}
 A.on.prototype={
 R(a){return A.a1a(A.b([A.a3F(this.c,null)],t.F),B.hJ,B.bI)}}
@@ -72040,9 +72040,9 @@ B.Aq=new A.oh(0,"repeat")
 B.Ar=new A.oh(1,"repeatX")
 B.As=new A.oh(2,"repeatY")
 B.cJ=new A.oh(3,"noRepeat")
-B.At=new A.on("Tap a food to flip the timer",null)
+B.At=new A.on("Tap the time to pause/resume",null)
 B.Au=new A.on("Swipe timers to delete",null)
-B.Av=new A.on("Tap the timer to pause/resume",null)
+B.Av=new A.on("Tap a food to start the flip timer",null)
 B.Ay=new A.fV(0.0825,0.2075,B.an)
 B.Az=new A.fV(0.4,1,B.aX)
 B.ks=new A.fV(0.5,1,B.aX)
@@ -73824,7 +73824,7 @@ B.Md=new A.k(!0,B.B,null,"Roboto",B.C,null,null,null,null,null,null,null,null,nu
 B.LC=new A.k(!0,B.n,null,"Roboto",B.C,null,null,null,null,null,null,null,null,null,null,null,null,B.e,null,null,null,"blackHelsinki labelMedium",null,null,null,null)
 B.LM=new A.k(!0,B.n,null,"Roboto",B.C,null,null,null,null,null,null,null,null,null,null,null,null,B.e,null,null,null,"blackHelsinki labelSmall",null,null,null,null)
 B.N6=new A.cQ(B.Mz,B.JJ,B.KH,B.LB,B.LO,B.J9,B.Kg,B.Jd,B.Ll,B.M0,B.KR,B.M2,B.Md,B.LC,B.LM)
-B.N7=new A.pr("Tap a food to add start the timer",null,null,null,null)
+B.N7=new A.pr("Tap a food to start a timer",null,null,null,null)
 B.PP=new A.a4l(0,"system")
 B.N8=new A.wr(null)
 B.eZ=new A.H_(0,"clamp")
