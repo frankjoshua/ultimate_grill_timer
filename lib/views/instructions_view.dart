@@ -11,13 +11,13 @@ class Instructions extends ConsumerWidget {
     final messages = <Widget>[];
 
     if (grillItems.isEmpty) {
-      messages.add(const Text("Tap a food to add start the timer"));
+      messages.add(const Text("Tap a food to start a timer"));
     }
     if (grillItems.isNotEmpty && grillItems.length < 2) {
       messages.addAll([
         const InstructionRow(text: "Swipe timers to delete"),
-        const InstructionRow(text: "Tap a food to flip the timer"),
-        const InstructionRow(text: "Tap the timer to pause/resume"),
+        const InstructionRow(text: "Tap a food to start the flip timer"),
+        const InstructionRow(text: "Tap the time to pause/resume"),
       ]);
     }
 
