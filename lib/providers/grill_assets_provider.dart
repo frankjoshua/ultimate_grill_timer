@@ -12,19 +12,20 @@ class GrillAssetsStateNotifier extends StateNotifier<List<GrillAsset>> {
   GrillAssetsStateNotifier() : super(defaultAssets);
 
   static final defaultAssets = [
-    GrillAsset(image: 'assets/images/meat.png'),
-    GrillAsset(image: 'assets/images/corn.png'),
-    GrillAsset(image: 'assets/images/burger.png'),
     GrillAsset(image: 'assets/images/potato.png'),
+    GrillAsset(image: 'assets/images/corn.png'),
+    GrillAsset(image: 'assets/images/asparagus.png'),
+    GrillAsset(image: 'assets/images/burger.png'),
+    GrillAsset(image: 'assets/images/meat.png'),
     GrillAsset(image: 'assets/images/chicken-leg.png'),
     GrillAsset(image: 'assets/images/chop.png'),
+    GrillAsset(image: 'assets/images/fish.png'),
     GrillAsset(image: 'assets/images/hot-dog.png'),
     GrillAsset(image: 'assets/images/pineapple.png'),
     GrillAsset(image: 'assets/images/ribs.png'),
     GrillAsset(image: 'assets/images/sausages.png'),
     GrillAsset(image: 'assets/images/shrimp.png'),
     GrillAsset(image: 'assets/images/skewer.png'),
-    GrillAsset(image: 'assets/images/steak.png'),
   ];
 
   void addAsset(GrillAsset asset) {
