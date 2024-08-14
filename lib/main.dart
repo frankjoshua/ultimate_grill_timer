@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return TimerManager(
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Ultimate Grill Timer',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(brightness: Brightness.dark, seedColor: Colors.deepPurple),
