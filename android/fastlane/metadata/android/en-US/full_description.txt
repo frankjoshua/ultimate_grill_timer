@@ -1,0 +1,18 @@
+Ultimate Grill Timer - Your Perfect Cooking Companion
+
+Take your grilling and cooking to the next level with Ultimate Grill Timer! Whether you're a barbecue enthusiast, a steak lover, or just want to perfectly time your roast, this app is designed to help you achieve perfection every time.
+
+Key Features:
+
+Multi Timer / Multitimer: Track cook times for multiple foods simultaneously, ensuring everything is grilled to perfection.
+Food Timer: Set precise cooking timers for different foods, from juicy steaks to tender roasts.
+Flip Timer: Never miss the perfect moment to flip your food! Start a flip timer for each food item and get notified when it's time to turn it over.
+Grill Timer: Designed specifically for grilling, this timer ensures your BBQ is always on point, whether you're grilling, roasting, or barbecuing.
+Why Choose Ultimate Grill Timer?
+
+Completely Free: No ads, no subscriptions, just pure grilling convenience.
+Open Source: The app is open source, giving you complete transparency and control over your cooking companion.
+Whether you're grilling steaks, barbecuing, or roasting, Ultimate Grill Timer is your ultimate tool for perfectly timed cooking. Download now and start grilling like a pro!
+
+Open Source. Apache 2.
+https://github.com/frankjoshua/ultimate_grill_timer
