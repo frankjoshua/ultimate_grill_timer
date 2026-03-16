@@ -65,7 +65,37 @@ lib/
 - Items synced by millisecond precision so concurrent timers align
 - Sorted by `startTime` for consistent ordering
 - Paused items render at 25% opacity with pause icon overlay
-- 14 food assets hardcoded in `GrillAssetsProvider.defaultAssets` with PNGs in `assets/images/`
+- 24 food assets hardcoded in `GrillAssetsProvider.defaultAssets` with PNGs in `assets/images/`
+
+## Adding New Food Icons
+
+**Style**: Flat design, bold saturated colors, light/dark split shading down center vertical axis, no outlines, no text, transparent background, 512x512 RGBA PNG.
+
+**Steps**:
+
+1. **Generate** via Replicate API using `openai/gpt-image-1.5`:
+   - `quality`: "high", `background`: "transparent", `output_format`: "png", `aspect_ratio`: "1:1"
+   - Prompt template: `"A [food item], flat design food icon for a mobile app, minimal geometric shapes, bold saturated colors, light-dark split shading down the center vertical axis where left half is lighter and right half is darker, no outlines, no text, no labels, no background elements, simple and clean, similar to Flaticon basic flat style, single food item centered, 512x512"`
+
+2. **Trim & resize** — generated images come at 1024x1024 with excess padding:
+   ```python
+   from PIL import Image
+   img = Image.open('icon.png')
+   cropped = img.crop(img.getbbox())  # trim transparent padding
+   max_dim = max(cropped.size)
+   padding = int(max_dim * 0.04)      # ~4% padding to match existing icons
+   canvas = Image.new('RGBA', (max_dim + 2*padding,)*2, (0,0,0,0))
+   canvas.paste(cropped, ((canvas.width-cropped.width)//2, (canvas.height-cropped.height)//2))
+   canvas.resize((512, 512), Image.LANCZOS).save('icon.png', 'PNG', optimize=True)
+   ```
+
+3. **Compress**: `pngquant --force --quality=65-80 --output icon.png icon.png` (target: 15-50KB)
+
+4. **Register** in `lib/providers/grill_assets_provider.dart`:
+   ```dart
+   GrillAsset(image: 'assets/images/icon.png'),
+   ```
+   No `pubspec.yaml` change needed — `assets/images/` directory is already declared.
 
 ## Deployment
 

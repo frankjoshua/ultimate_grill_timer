@@ -26,6 +26,16 @@ class GrillAssetsStateNotifier extends StateNotifier<List<GrillAsset>> {
     GrillAsset(image: 'assets/images/sausages.png'),
     GrillAsset(image: 'assets/images/shrimp.png'),
     GrillAsset(image: 'assets/images/skewer.png'),
+    GrillAsset(image: 'assets/images/wings.png'),
+    GrillAsset(image: 'assets/images/bell-pepper.png'),
+    GrillAsset(image: 'assets/images/mushroom.png'),
+    GrillAsset(image: 'assets/images/onion.png'),
+    GrillAsset(image: 'assets/images/zucchini.png'),
+    GrillAsset(image: 'assets/images/bacon.png'),
+    GrillAsset(image: 'assets/images/lobster-tail.png'),
+    GrillAsset(image: 'assets/images/jalapeno.png'),
+    GrillAsset(image: 'assets/images/tomato.png'),
+    GrillAsset(image: 'assets/images/bread.png'),
   ];
 
   void addAsset(GrillAsset asset) {
