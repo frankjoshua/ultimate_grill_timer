@@ -47,9 +47,11 @@ class _AddGrillItemButtonRowState extends ConsumerState<AddGrillItemButtonRow> {
           itemCount: grillAssets.length,
           itemBuilder: (context, index) {
             final asset = grillAssets[index];
+            final name = asset.image.split('/').last.split('.').first.replaceAll('-', ' ');
+            final capitalizedName = name.split(' ').map((w) => w[0].toUpperCase() + w.substring(1)).join(' ');
             return FloatingActionButton(
               onPressed: () { _addTimer(asset.image); },
-              tooltip: 'Add Timer',
+              tooltip: 'Add $capitalizedName Timer',
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Image.asset(asset.image),
