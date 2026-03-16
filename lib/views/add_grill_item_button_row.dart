@@ -33,31 +33,43 @@ class _AddGrillItemButtonRowState extends ConsumerState<AddGrillItemButtonRow> {
       height = 100.0;
     };
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: SizedBox(
-        height: height, // Adjust the height to fit the desired number of rows
-        child: GridView.builder(
-          scrollDirection: Axis.horizontal,
-          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 75.0, // Maximum width for each item
-            mainAxisSpacing: 8.0, // Spacing between items horizontally
-            crossAxisSpacing: 8.0, // Spacing between items vertically
-            childAspectRatio: 1.0, // Aspect ratio of the items
+      padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 24.0),
+      child: ShaderMask(
+        shaderCallback: (Rect bounds) {
+          return const LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: [Colors.white, Colors.white, Colors.transparent],
+            stops: [0.0, 0.9, 1.0],
+          ).createShader(bounds);
+        },
+        blendMode: BlendMode.dstIn,
+        child: SizedBox(
+          height: height, // Adjust the height to fit the desired number of rows
+          child: GridView.builder(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 75.0, // Maximum width for each item
+              mainAxisSpacing: 8.0, // Spacing between items horizontally
+              crossAxisSpacing: 8.0, // Spacing between items vertically
+              childAspectRatio: 1.0, // Aspect ratio of the items
+            ),
+            itemCount: grillAssets.length,
+            itemBuilder: (context, index) {
+              final asset = grillAssets[index];
+              final name = asset.image.split('/').last.split('.').first.replaceAll('-', ' ');
+              final capitalizedName = name.split(' ').map((w) => w[0].toUpperCase() + w.substring(1)).join(' ');
+              return FloatingActionButton(
+                onPressed: () { _addTimer(asset.image); },
+                tooltip: 'Add $capitalizedName Timer',
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.asset(asset.image),
+                ),
+              );
+            },
           ),
-          itemCount: grillAssets.length,
-          itemBuilder: (context, index) {
-            final asset = grillAssets[index];
-            final name = asset.image.split('/').last.split('.').first.replaceAll('-', ' ');
-            final capitalizedName = name.split(' ').map((w) => w[0].toUpperCase() + w.substring(1)).join(' ');
-            return FloatingActionButton(
-              onPressed: () { _addTimer(asset.image); },
-              tooltip: 'Add $capitalizedName Timer',
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Image.asset(asset.image),
-              ),
-            );
-          },
         ),
       ),
     );
