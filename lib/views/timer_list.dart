@@ -121,7 +121,7 @@ class GrillItemIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
+    return Stack(clipBehavior: Clip.none, children: [
       Transform(
         alignment: Alignment.center,
         transform: Matrix4.rotationZ(grillItem.flips * (3.14159) * 0.5),
@@ -162,10 +162,15 @@ class FlipCounter extends StatelessWidget {
         child: Row(
           children: [
             Text(flips.toString(),
-                style: Theme.of(context).textTheme.labelSmall),
-            const SizedBox(width: 5),
+                style: const TextStyle(fontSize: 28)),
+            Icon(
+              flips.isOdd ? Icons.arrow_downward : Icons.arrow_upward,
+              color: Colors.white,
+              size: 28,
+            ),
+            const SizedBox(width: 12),
             Text(timer.getFormattedElapsedTime(),
-                style: Theme.of(context).textTheme.labelSmall),
+                style: const TextStyle(fontSize: 28)),
           ],
         ),
       ),
