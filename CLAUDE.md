@@ -14,6 +14,7 @@ Cross-platform Flutter app — "The Ultimate Grill Timer" — for managing multi
 
 ```bash
 # Run
+flutter run -d web-server --web-port=8080  # Local web server (http://localhost:8080/ultimate_grill_timer)
 flutter run -d chrome          # Web development
 flutter run                    # Connected device (Android/iOS)
 
@@ -33,6 +34,8 @@ flutter analyze                # Lint (uses flutter_lints)
 # Icons
 flutter pub run flutter_launcher_icons:main  # Regenerate from assets/icon/icon.jpg
 ```
+
+**Note**: The `web-server` device does not support hot reload/restart. You must kill the server (`fuser -k 8080/tcp`) and relaunch it to see code changes.
 
 ## Architecture
 
