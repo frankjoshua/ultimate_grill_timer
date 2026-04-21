@@ -151,9 +151,11 @@ class FlipCounter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      bottom: 0,
-      right: 0,
-      child: Container(
+      left: 30,
+      top: 30,
+      child: FractionalTranslation(
+        translation: const Offset(-0.5, -0.5),
+        child: Container(
         decoration: BoxDecoration(
           color: Colors.black45,
           borderRadius: BorderRadius.circular(10),
@@ -172,6 +174,7 @@ class FlipCounter extends StatelessWidget {
             Text(timer.getFormattedElapsedTime(),
                 style: const TextStyle(fontSize: 28)),
           ],
+        ),
         ),
       ),
     );

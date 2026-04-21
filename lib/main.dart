@@ -48,15 +48,17 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
   Widget build(BuildContext context) {
     return SaveStateWidget(
       child: const Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Expanded(child: TimerList()),
-              Instructions(),
-              const SizedBox(height: 16),
-              AddGrillItemButtonRow(),
-            ],
+        body: SafeArea(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Expanded(child: TimerList()),
+                Instructions(),
+                const SizedBox(height: 16),
+                AddGrillItemButtonRow(),
+              ],
+            ),
           ),
         ),
       ),
