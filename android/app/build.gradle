@@ -70,8 +70,36 @@ android {
             signingConfig signingConfigs.release
         }
     }
+
+    // Two Play artifacts, one app: "phone" goes to the normal production track,
+    // "wear" (watch feature + tile, versionCode offset) goes to the wear:production track.
+    flavorDimensions = ["device"]
+    productFlavors {
+        phone {
+            dimension "device"
+        }
+        wear {
+            dimension "device"
+            versionCode = flutterVersionCode.toInteger() + 100000
+        }
+    }
 }
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    // Wear OS tile (GrillTileService)
+    // 1.5/1.3 minimum: tiles 1.4 finds SysUI via a Settings read that
+    // throws SecurityException on targetSdk 35+
+    implementation "androidx.wear.tiles:tiles:1.5.0"
+    implementation "androidx.wear.protolayout:protolayout:1.3.0"
+    implementation "androidx.wear.protolayout:protolayout-expression:1.3.0"
+    implementation "androidx.concurrent:concurrent-futures:1.2.0"
+    // Phone <-> watch state sync (GrillSync / GrillDataListenerService)
+    implementation "com.google.android.gms:play-services-wearable:19.0.0"
+    testImplementation "junit:junit:4.13.2"
+    // real org.json for JVM unit tests (android.jar ships stubs)
+    testImplementation "org.json:json:20240303"
 }

@@ -1,0 +1,23 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- required=true (the default): Play filters this artifact to watches only. -->
+    <uses-feature android:name="android.hardware.type.watch"/>
+    <application>
+        <!-- App runs standalone on the watch; the tile reads its local timer state. -->
+        <meta-data
+            android:name="com.google.android.wearable.standalone"
+            android:value="true" />
+        <service
+            android:name=".GrillTileService"
+            android:exported="true"
+            android:label="Grill Timers"
+            android:icon="@mipmap/ic_launcher"
+            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">
+            <intent-filter>
+                <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER"/>
+            </intent-filter>
+            <meta-data
+                android:name="androidx.wear.tiles.PREVIEW"
+                android:resource="@mipmap/ic_launcher" />
+        </service>
+    </application>
+</manifest>

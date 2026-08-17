@@ -1,4 +1,8 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!-- Wear libraries declare minSdk 26; the tile only binds on watches (API 30+),
+         phones below 26 never touch this code. -->
+    <uses-sdk tools:overrideLibrary="androidx.wear.tiles,androidx.wear.protolayout,androidx.wear.protolayout.expression,androidx.wear.protolayout.proto,androidx.wear.tiles.proto"/>
     <application
         android:label="Ultimate Grill Timer"
         android:name="${applicationName}"
@@ -25,6 +29,14 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <service
+            android:name=".GrillDataListenerService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.wearable.DATA_CHANGED"/>
+                <data android:scheme="wear" android:host="*" android:path="/grill_items"/>
+            </intent-filter>
+        </service>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data
