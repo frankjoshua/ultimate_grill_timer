@@ -7,4 +7,5 @@ mv build/web/* docs/
 git add docs/
 git commit -am "Deploy to GitHub pages"
 git push
-flutter build appbundle
+flutter build appbundle --flavor phone
+flutter build appbundle --flavor wear

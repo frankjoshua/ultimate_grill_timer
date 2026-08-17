@@ -20,7 +20,8 @@ flutter run                    # Connected device (Android/iOS)
 
 # Build
 flutter build web --release    # Web build → build/web/
-flutter build appbundle        # Android release bundle
+flutter build appbundle --flavor phone  # Android phone release bundle
+flutter build appbundle --flavor wear   # Wear OS release bundle (tile + watch app)
 
 # Test & Lint
 flutter test                   # Run all tests
@@ -55,7 +56,7 @@ lib/
 └── use_case/                          # Save/restore to SharedPreferences
 ```
 
-**Widget tree**: `MyApp → TimerManager → MyHomePage → SaveStateWidget → Scaffold` with TimerList, Instructions, and AddGrillItemButtonRow.
+**Widget tree**: `MyApp → TimerManager → SaveStateWidget → MaterialApp`. Home depends on launch: `MyHomePage` (phone: TimerList, Instructions, AddGrillItemButtonRow), `WatchHomeScreen` (watch hardware: scrollable timer list + Add row), or `AddFoodScreen` (watch tile's Add button). `MainActivity.getInitialRoute` picks `/watch`/`/add`.
 
 **Core interaction flow**: Tap food icon → starts timer → tap same icon again → starts flip timer (tracks second side) → tap timer → pause/resume → swipe → delete.
 
@@ -101,4 +102,5 @@ lib/
 
 - **Web**: GitHub Pages from `docs/` directory, base href `/ultimate_grill_timer/`
 - **Android**: Fastlane lanes — `test`, `beta` (Crashlytics), `deploy` (Play Store). Signing key at `/home/josh/Documents/ultimate_grill_timer_digital_key/key.properties`
+- **Wear OS**: same package, separate artifact. `wear` product flavor (versionCode = phone + 100000) declares the watch feature and `GrillTileService` (native Kotlin tile in `android/app/src/main/kotlin/`); `deploy` lane uploads it to the Play `wear:production` track
 - **Version format**: `major.minor.patch+buildNumber` in `pubspec.yaml` (currently 1.0.13+14)
